@@ -96,13 +96,32 @@
                     BuildAction = "Compile"
                 />
                 <File
-                    RelPath = "Form1.cs"
+                    RelPath = "HackerNews.cs"
                     SubType = "Form"
                     BuildAction = "Compile"
                 />
                 <File
-                    RelPath = "Form1.resx"
-                    DependentUpon = "Form1.cs"
+                    RelPath = "HackerNews.resx"
+                    DependentUpon = "HackerNews.cs"
+                    BuildAction = "EmbeddedResource"
+                />
+                <File
+                    RelPath = "HNClient.cs"
+                    SubType = "Code"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "HNItem.cs"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "HNItemForm.cs"
+                    SubType = "Form"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "HNItemForm.resx"
+                    DependentUpon = "HNItemForm.cs"
                     BuildAction = "EmbeddedResource"
                 />
             </Include>
