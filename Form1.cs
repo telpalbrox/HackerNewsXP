@@ -74,7 +74,6 @@ namespace WindowsApplication1
 	/// </summary>
 	public class Form1 : System.Windows.Forms.Form
 	{
-		private EventHandler onNetworkFinish;
 		private ReceivePostsDelegate receivePostsDelegate;
 		private System.Windows.Forms.Panel itemLinksPanel;
 		/// <summary>
