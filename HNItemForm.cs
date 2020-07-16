@@ -11,13 +11,16 @@ namespace HackerNews
 	/// </summary>
 	public class HNItemForm : System.Windows.Forms.Form
 	{
+		private HNItem item;
+		private System.Windows.Forms.Label itemLabel;
 		/// <summary>
 		/// Required designer variable.
 		/// </summary>
 		private System.ComponentModel.Container components = null;
 
-		public HNItemForm()
+		public HNItemForm(HNItem item)
 		{
+			this.item = item;
 			//
 			// Required for Windows Form Designer support
 			//
@@ -26,6 +29,7 @@ namespace HackerNews
 			//
 			// TODO: Add any constructor code after InitializeComponent call
 			//
+			this.itemLabel.Text = item.Title;
 		}
 
 		/// <summary>
@@ -50,9 +54,25 @@ namespace HackerNews
 		/// </summary>
 		private void InitializeComponent()
 		{
-			this.components = new System.ComponentModel.Container();
-			this.Size = new System.Drawing.Size(300,300);
+			this.itemLabel = new System.Windows.Forms.Label();
+			this.SuspendLayout();
+			// 
+			// itemLabel
+			// 
+			this.itemLabel.Location = new System.Drawing.Point(16, 8);
+			this.itemLabel.Name = "itemLabel";
+			this.itemLabel.TabIndex = 0;
+			// 
+			// HNItemForm
+			// 
+			this.AutoScaleBaseSize = new System.Drawing.Size(5, 13);
+			this.ClientSize = new System.Drawing.Size(292, 273);
+			this.Controls.AddRange(new System.Windows.Forms.Control[] {
+																		  this.itemLabel});
+			this.Name = "HNItemForm";
 			this.Text = "HNItemForm";
+			this.ResumeLayout(false);
+
 		}
 		#endregion
 	}

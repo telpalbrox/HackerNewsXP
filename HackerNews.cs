@@ -13,6 +13,7 @@ namespace HackerNews
 	public class Form1 : System.Windows.Forms.Form
 	{
 		private ReceivePostsDelegate receivePostsDelegate;
+		private IList items = null;
 		private System.Windows.Forms.Panel itemLinksPanel;
 		/// <summary>
 		/// Required designer variable.
@@ -110,15 +111,48 @@ namespace HackerNews
 
 		private void onReceivePosts(IList items)
 		{
-			Console.WriteLine(items);
+			this.items = items;
 			for (int i = 0; i < items.Count; i++) 
 			{
 				HNItem item = (HNItem) items[i];
 				LinkLabel itemLabel = new System.Windows.Forms.LinkLabel();
 				itemLabel.Text = item.Title;
 				itemLabel.Dock = System.Windows.Forms.DockStyle.Top;
+				itemLabel.Click += new System.EventHandler(this.onClickItem);
 				itemLinksPanel.Controls.Add(itemLabel);
 			}
+		}
+
+		private void onClickItem(object sender, System.EventArgs args)
+		{
+			LinkLabel label = (LinkLabel) sender;
+			HNItem item = getItemByTitle(label.Text);
+			if (item == null)
+			{
+				return;
+			}
+
+			HNItemForm itemForm  = new HNItemForm(item);
+			itemForm.Show();
+		}
+
+		private HNItem getItemByTitle(String title) 
+		{
+			if (items == null)
+			{
+				return null;
+			}
+
+			for (int i = 0; i < items.Count; i++)
+			{
+				HNItem item = (HNItem) items[i];
+				if (item.Title.Equals(title))
+				{
+					return item;
+				}
+			}
+
+			return null;
 		}
 	}
 }
