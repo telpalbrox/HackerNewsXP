@@ -112,6 +112,7 @@
                 />
                 <File
                     RelPath = "HNItem.cs"
+                    SubType = "Code"
                     BuildAction = "Compile"
                 />
                 <File
@@ -123,6 +124,11 @@
                     RelPath = "HNItemForm.resx"
                     DependentUpon = "HNItemForm.cs"
                     BuildAction = "EmbeddedResource"
+                />
+                <File
+                    RelPath = "Json.cs"
+                    SubType = "Code"
+                    BuildAction = "Compile"
                 />
             </Include>
         </Files>
