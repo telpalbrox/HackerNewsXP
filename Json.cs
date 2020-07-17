@@ -24,6 +24,12 @@ namespace HackerNews
 			this.source = source;
 		}
 
+		private void consume(char ch) 
+		{
+			expectChar(ch);
+			position++;
+		}
+
 		private void expectChar(char ch)
 		{
 			if (source[position] != ch) 
@@ -32,10 +38,30 @@ namespace HackerNews
 			}
 		}
 
+		private boolean charAtCurrentPosition(char ch)
+		{
+			return source[position] == ch;
+		}
+
+		private String consumeUntil(char ch) 
+		{
+		}
+
+		private void parseObject() 
+		{
+			String key = null;
+			int value = 0;
+			consume('"');
+
+		}
+
 		public IDictionary parse() 
 		{
-			this.source = source;
-			this.expectChar('{');
+			if (charAtCurrentPosition('{')) 
+			{
+				consume('{');
+				parseObject();
+			}
 
 			return map;
 		}
