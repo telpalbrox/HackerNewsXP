@@ -126,7 +126,17 @@
                     BuildAction = "EmbeddedResource"
                 />
                 <File
-                    RelPath = "Json.cs"
+                    RelPath = "JsonParser.cs"
+                    SubType = "Code"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "JsonType.cs"
+                    SubType = "Code"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "JsonValue.cs"
                     SubType = "Code"
                     BuildAction = "Compile"
                 />

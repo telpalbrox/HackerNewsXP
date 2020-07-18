@@ -3,107 +3,10 @@ using System.Collections;
 
 namespace HackerNews
 {
-	public enum JsonType 
-	{
-		Number,
-		String,
-		Object,
-		Array,
-		Boolean,
-		Null
-	}
-
-	public class JsonValue 
-	{
-		public readonly double Number;
-		public readonly String String;
-		public readonly IDictionary Object;
-		public readonly IList Array;
-		public readonly bool Boolean;
-		public readonly bool IsNull;
-		public readonly JsonType Type;
-
-		public static JsonValue NullValue()
-		{
-			return new JsonValue(JsonType.Null);
-		}
-
-		public JsonValue(double number) 
-		{
-			Number = number;
-			Type = JsonType.Number;
-		}
-
-		public JsonValue(bool boolean) 
-		{
-			Boolean = boolean;
-			Type = JsonType.Boolean;
-		}
-
-		public JsonValue(IDictionary obj)
-		{
-			Object = obj;
-			Type = JsonType.Object;
-		}
-
-		public JsonValue(String str)
-		{
-			String = str;
-			Type = JsonType.String;
-		}
-
-		public JsonValue(IList array)
-		{
-			Array = array;
-			Type = JsonType.Array;
-		}
-
-		private JsonValue(JsonType type) 
-		{
-			Type = type;
-		}
-
-		public bool True 
-		{
-			get 		
-			{
-				return Type == JsonType.Boolean && Boolean;
-			}
-		}
-
-		public bool False 
-		{
-			get 		
-			{
-				return Type == JsonType.Boolean && !Boolean;
-			}
-		}
-
-		public bool Null 
-		{
-			get 		
-			{
-				return Type == JsonType.Null;
-			}
-		}
-
-		public bool IsObject
-		{
-			get
-			{
-				return Type == JsonType.Object;
-			}
-		}
-
-		public static explicit operator double(JsonValue number)
-		{
-			return number.Number;
-		}
-	}
 	/// <summary>
-	/// Summary description for Json.
+	/// Heavily inspired by https://github.com/SerenityOS/serenity/blob/e8e728454c5d436a02eaa1d24bc3afe357090c52/AK/JsonParser.cpp
 	/// </summary>
-	public class Json
+	public class JsonParser
 	{
 		private String input = null;
 		private int index = 0;
@@ -117,32 +20,32 @@ namespace HackerNews
 			}
 		}
 
-		public static void run()
+		public static void tests()
 		{
 			String test1 = "null";
-			Json json1 = new Json(test1);
+			JsonParser json1 = new JsonParser(test1);
 			JsonValue result1 = json1.parse();
 			assert(result1.Null);
 
 			String test2 = "true";
-			Json json2 = new Json(test2);
+			JsonParser json2 = new JsonParser(test2);
 			JsonValue result2 = json2.parse();
 			assert(result2.True);
 
 			String test3 = "false";
-			Json json3 = new Json(test3);
+			JsonParser json3 = new JsonParser(test3);
 			JsonValue result3 = json3.parse();
 			assert(result3.False);
 
 			String test4 = "{}";
-			Json json4 = new Json(test4);
+			JsonParser json4 = new JsonParser(test4);
 			JsonValue result4 = json4.parse();
 			assert(result4.IsObject);
 			IDictionary obj4 = result4.Object;
 			assert(obj4.Keys.Count == 0);
 
 			String test5 = "{ \"test\": true }";
-			Json json5 = new Json(test5);
+			JsonParser json5 = new JsonParser(test5);
 			JsonValue result5 = json5.parse();
 			assert(result5.IsObject);
 			IDictionary obj5 = result5.Object;
@@ -151,27 +54,27 @@ namespace HackerNews
 			assert(value5.True);
 
 			String test6 = "\"lol\"";
-			Json json6 = new Json(test6);
+			JsonParser json6 = new JsonParser(test6);
 			JsonValue result6 = json6.parse();
 			assert(result6.String == "lol");
 
 			String test7 = "27";
-			Json json7 = new Json(test7);
+			JsonParser json7 = new JsonParser(test7);
 			JsonValue result7 = json7.parse();
 			assert(result7.Number == 27);
 
 			String test8 = "27.42";
-			Json json8 = new Json(test8);
+			JsonParser json8 = new JsonParser(test8);
 			JsonValue result8 = json8.parse();
 			assert(result8.Number == 27.42);
 
 			String test9 = "[1, \"dos\", null]";
-			Json json9 = new Json(test9);
+			JsonParser json9 = new JsonParser(test9);
 			JsonValue result9 = json9.parse();
 			assert(result9.Array.Count == 3);
 		}
 
-		public Json(String input) 
+		public JsonParser(String input) 
 		{
 			this.input = input;
 		}
