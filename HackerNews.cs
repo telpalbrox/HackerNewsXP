@@ -85,8 +85,8 @@ namespace HackerNews
 		[STAThread]
 		static void Main() 
 		{
-			// Application.Run(new Form1());
-			JsonParser.tests();
+			Application.Run(new Form1());
+			// JsonParser.tests();
 		}
 
 		private void sendRequest()
